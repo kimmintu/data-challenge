@@ -1,4 +1,7 @@
 import pymongo
+import json
+import pymongo
+from bson import json_util
 
 class FlatFinder:
     def __init__(self):
@@ -7,14 +10,16 @@ class FlatFinder:
 
     def __initDB(self):
         dblist = self.__mongoClient.list_database_names()
-        if "flatdb" in dblist:
+        if "flatdb2" in dblist:
             print("The database exists.")
         else:
-            self.__mongoClient["flatdb"]
+            self.__mongoClient["flatdb2"]
 
     def FindByStandort(self, standort):
-        mydb = self.__mongoClient["flatdb"]
+        mydb = self.__mongoClient["flatdb2"]
         db = mydb["flats"]
-        myquery = {"companyCity" : "Luzern"}
+        myquery = {"cityName" : standort}
+        query2 = {"attributesInside":{"wheelChairAccessible":True,"cellar":True}}
+        foo = db.find_one(query2)
 
-        return result
+        return json.dumps(foo, sort_keys=True, indent=4, default=json_util.default)

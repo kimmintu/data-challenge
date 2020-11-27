@@ -8,10 +8,11 @@ import requests
 class ImmoClient:
     def __init__(self):
         self.__baseUrl = "https://rest-api.immoscout24.ch/v4/de/properties/"
-        self.__url = 'https://rest-api.immoscout24.ch/v4/de/properties?l=2253&r=5&s=1&t=1'
+        #self.__url = 'https://rest-api.immoscout24.ch/v4/de/properties?l=2253&r=5&s=1&t=1'
+        self.__url2 = 'https://rest-api.immoscout24.ch/v4/de/properties/6282529'
 
     def getRawJson(self):
-        response = requests.get(self.__url)
+        response = requests.get(self.__url2)
         rawJson = response.json()
         print(type(rawJson))
 
