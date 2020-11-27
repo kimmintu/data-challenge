@@ -14,10 +14,7 @@ app.config["DEBUG"] = True
 @app.route('/insertlatest', methods=['GET'])
 def insertLatestData():
     client = ImmoClient()
-    rawdata = client.getRawJson()
-    modifier = AdvertModifier()
-    modifier.Insert(rawdata)
-    return rawdata
+    rawdata = client.InsertRawData()
 
 @app.route('/standort/<standort>', methods=['GET'])
 def getByStandort(standort):
@@ -27,7 +24,7 @@ def getByStandort(standort):
 @app.route('/', methods=['GET'])
 def getAll():
     client = ImmoClient()
-    rawdata = client.getRawJson()
+    rawdata = client.InsertRawData()
     return rawdata
 
 @app.route('/<id>', methods=['GET'])

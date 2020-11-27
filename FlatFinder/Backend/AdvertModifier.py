@@ -7,14 +7,14 @@ class AdvertModifier:
 
     def __initDB(self):
         dblist = self.__mongoClient.list_database_names()
-        if "flatdb2" in dblist:
+        if "flatdb3" in dblist:
             print("The database exists.")
         else:
-            self.__mongoClient["flatdb2"]
+            self.__mongoClient["flatdb3"]
 
     def Insert(self, rawJson):
         properties = rawJson["properties"]
-        collection = self.__mongoClient["flatdb2"]
+        collection = self.__mongoClient["flatdb3"]
         db = collection["flats"]
 
         for obj in properties:

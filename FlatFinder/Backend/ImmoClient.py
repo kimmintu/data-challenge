@@ -1,6 +1,6 @@
 import json
 from urllib.parse import urljoin
-
+from AdvertModifier import AdvertModifier
 import requests
 
 # add &pa=30 to retrieve newest rental from the last 30 days
@@ -8,15 +8,19 @@ import requests
 class ImmoClient:
     def __init__(self):
         self.__baseUrl = "https://rest-api.immoscout24.ch/v4/de/properties/"
-        #self.__url = 'https://rest-api.immoscout24.ch/v4/de/properties?l=2253&r=5&s=1&t=1'
-        self.__url2 = 'https://rest-api.immoscout24.ch/v4/de/properties/6282529'
+        self.__url = 'https://rest-api.immoscout24.ch/v4/de/properties?l=2253&r=5&s=1&t=1'
 
-    def getRawJson(self):
-        response = requests.get(self.__url2)
+    def InsertRawData(self):
+        response = requests.get(self.__url)
         rawJson = response.json()
-        print(type(rawJson))
-
-        return rawJson
+        properties = rawJson["properties"]
+        for prop in properties:
+            id = prop["id"]
+            response = requests.get(urljoin(self.__baseUrl, str(id)))
+            rawJson = response.json()
+            modifier = AdvertModifier()
+            modifier.Insert(rawJson)
+        return "worked"
 
     def getDetailAd(self, id):
         response = requests.get(urljoin(self.__baseUrl, id))

@@ -10,13 +10,13 @@ class FlatFinder:
 
     def __initDB(self):
         dblist = self.__mongoClient.list_database_names()
-        if "flatdb2" in dblist:
+        if "flatdb3" in dblist:
             print("The database exists.")
         else:
-            self.__mongoClient["flatdb2"]
+            self.__mongoClient["flatdb3"]
 
     def FindByStandort(self, standort):
-        mydb = self.__mongoClient["flatdb2"]
+        mydb = self.__mongoClient["flatdb3"]
         db = mydb["flats"]
         myquery = {"cityName" : standort}
         query2 = {"attributesInside":{"wheelChairAccessible":True,"cellar":True}}
