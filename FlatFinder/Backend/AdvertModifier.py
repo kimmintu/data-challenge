@@ -13,9 +13,7 @@ class AdvertModifier:
             self.__mongoClient["flatdb3"]
 
     def Insert(self, rawJson):
-        properties = rawJson["properties"]
         collection = self.__mongoClient["flatdb3"]
         db = collection["flats"]
 
-        for obj in properties:
-            db.insert_one(obj)
+        db.insert_one(rawJson)

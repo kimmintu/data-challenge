@@ -16,16 +16,20 @@ def insertLatestData():
     client = ImmoClient()
     rawdata = client.InsertRawData()
 
-@app.route('/standort/<standort>', methods=['GET'])
-def getByStandort(standort):
-    finder = FlatFinder()
-    return finder.FindByStandort(standort)
-
-@app.route('/', methods=['GET'])
+@app.route('/all', methods=['GET'])
 def getAll():
-    client = ImmoClient()
-    rawdata = client.InsertRawData()
-    return rawdata
+    finder = FlatFinder()
+    return finder.FindAll()
+
+@app.route('/seniors', methods=['GET'])
+def getSeniors():
+    finder = FlatFinder()
+    return finder.FindSeniors()
+
+@app.route('/test/<test>', methods=['GET'])
+def FindTest(test):
+    finder = FlatFinder()
+    return finder.FindTest(test)
 
 @app.route('/<id>', methods=['GET'])
 def getFlatById(id):
